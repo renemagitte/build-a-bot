@@ -1,4 +1,5 @@
-<https://app.pluralsight.com/library/courses/vuejs-fundamentals>
+* <https://app.pluralsight.com/library/courses/vuejs-fundamentals>
+* Repo: <https://github.com/jmcooper/vuejs-fundamentals>
 
 
 # build-a-bot
