@@ -13,29 +13,40 @@
 
     <main class="main">
 
-      <HomePage />
+      <RobotBuilder />
     </main>
 
   </div>
 </template>
 
 <script>
-import HomePage from './components/HomePage.vue';
+// import HomePage from './home/HomePage.vue';
+import RobotBuilder from './build/RobotBuilder.vue';
 
 export default {
   name: 'app',
   components: {
-    HomePage,
+    RobotBuilder,
   },
 };
 </script>
 
-<style>
 
-body {
-  background: linear-gradient( #555555, #999999);
-  background-attachment: fixed;
-}
+<style>
+  body {
+    background: linear-gradient( #555555, #999999);
+    background-attachment: fixed;
+  }
+
+</style>
+
+
+<style scoped>
+
+/* Target div within child component with root-name (content) and deep selector (>>>) */
+/* .content /deep/ .robot-name { or .content >>> .robot-name {
+  border: 2px solid blue;
+} */
 
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
