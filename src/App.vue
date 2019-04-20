@@ -4,30 +4,49 @@
       <nav>
         <ul>
           <li class="nav-item">
-            <img class="logo" src="./assets/build-a-bot-logo.png" />
-            Build-a-Bot
+            <!-- Attrubute 'exact' makes so that special vue class 'router-link-active' only applies to the exact route! -->
+            <!-- This can also be done with adding attribute 'active-class="my-active-class-name"' -->
+            <router-link class="nav-link" :to="{name: 'Home'}" exact>
+              <img class="logo" src="./assets/build-a-bot-logo.png" />
+              Build-a-Bot
+            </router-link>
           </li>
+
+          <li class="nav-item">
+            <router-link class="nav-link" :to="{name: 'Build'}" exact>
+              Build
+            </router-link>
+          </li>
+
         </ul>
       </nav>
     </header>
 
-    <main class="main">
+    <div class="container">
 
-      <RobotBuilder />
-    </main>
+      <aside class="aside">
+        <router-view name="sidebar" />
+      </aside>
+
+      <main class="main">
+        <!-- <RobotBuilder /> -->
+        <router-view></router-view>
+      </main>
+
+    </div>
 
   </div>
 </template>
 
 <script>
 // import HomePage from './home/HomePage.vue';
-import RobotBuilder from './build/RobotBuilder.vue';
+//import RobotBuilder from './build/RobotBuilder.vue';
 
 export default {
   name: 'app',
-  components: {
-    RobotBuilder,
-  },
+  // components: {
+  //   RobotBuilder,
+  // },
 };
 </script>
 
@@ -78,6 +97,29 @@ ul {
 .logo {
   vertical-align: middle;
   height: 30px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Special Vue class! */
+.router-link-active {
+  color: white;
+}
+
+.container {
+  display: flex;
+  margin: 10px auto 0 auto;
+  justify-content: center;
+}
+
+.aside {
+  padding: 30px;
+  background-color: #aaa;
+  width: 100px;
+  min-height: 300px;
 }
 
 
