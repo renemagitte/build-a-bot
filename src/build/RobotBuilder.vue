@@ -140,7 +140,7 @@
     computed: {
       // Will update whenever data returns from created() dispatched...
       availableParts() {
-        return this.$store.state.parts;
+        return this.$store.state.robots.parts;
       },
       saleBorderClass() {
         return this.selectedRobot.head.onSale ? 'sale-border' : '';
@@ -154,17 +154,16 @@
         // Add to cart locally in state:
         // this.cart.push(Object.assign({}, robot, { cost }));
         // Add robot to global store state! First param is the name of the mutation, followed by the state data:
-        //addRobotToCart returns a promise, if true then router redirects to cart:
+        // addRobotToCart returns a promise, if true then router redirects to cart:
         this.$store.dispatch('addRobotToCart', Object.assign({}, robot, { cost }))
           .then(() => this.$router.push('/cart'));
-
         this.addedToCart = true;
       },
 
 
 
-    }
-  }
+    },
+  };
 
 </script>
 

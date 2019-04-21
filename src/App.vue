@@ -59,7 +59,10 @@ export default {
   // },
   computed: {
     cart() {
-      return this.$store.state.cart;
+      // When returned from store/index
+      // return this.$store.state.cart;
+      // When moved to separate robots-module:
+      return this.$store.state.robots.cart;
     },
   },
 };
