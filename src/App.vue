@@ -6,7 +6,7 @@
     <br />
     Root Getter Foo: {{rootGetterFoo}} <br />
     Robots Getter Foo: {{robotsGetterFoo}} <br />
-    Users Getter Foo: {{usersGetterFoo}} <br />
+    <!-- Users Getter Foo: {{usersGetterFoo}} <br /> -->
 
     <header>
       <nav>
@@ -61,7 +61,7 @@
 // import RobotBuilder from './build/RobotBuilder.vue';
 
 // Adding a helper for less code in computed section:
-import { mapState } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 
 export default {
   name: 'app',
@@ -87,15 +87,17 @@ export default {
     // usersFoo() {
     //   return this.$store.state.users.foo;
     // },
-    rootGetterFoo() {
-      return this.$store.getters.foo;
-    },
-    robotsGetterFoo() {
-      return this.$store.getters['robots/foo'];
-    },
-    usersGetterFoo() {
-      return this.$store.getters['users/foo'];
-    },
+    ...mapGetters({ rootGetterFoo: 'foo' }),
+    ...mapGetters('robots', {robotsGetterFoo: 'foo'}),
+    // rootGetterFoo() {
+    //   return this.$store.getters.foo;
+    // },
+    // robotsGetterFoo() {
+    //   return this.$store.getters['robots/foo'];
+    // },
+    // usersGetterFoo() {
+    //   return this.$store.getters['users/foo'];
+    // },
     cart() {
       // When returned from store/index
       // return this.$store.state.cart;
