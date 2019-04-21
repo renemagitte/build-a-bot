@@ -60,6 +60,9 @@
 <script>
 // import RobotBuilder from './build/RobotBuilder.vue';
 
+// Adding a helper for less code in computed section:
+import { mapState } from 'vuex';
+
 export default {
   name: 'app',
   // components: {
@@ -69,15 +72,21 @@ export default {
   // root and NON-namespaced modules shares namespace (and so getters within it), but not state!!!
   // Also users getter will apply to root in this scenario..........
   computed: {
-    rootFoo() {
-      return this.$store.state.foo;
-    },
-    robotsFoo() {
-      return this.$store.state.robots.foo;
-    },
-    usersFoo() {
-      return this.$store.state.users.foo;
-    },
+    ...mapState({
+      rootFoo: 'foo',
+      usersFoo: state => state.users.foo
+    }),
+    // An alternative to robotsFoo above would be (works with namespaced moldules only)
+    ...mapState('robots', { robotsFoo: 'foo' }),
+    // rootFoo() {
+    //   return this.$store.state.foo;
+    // },
+    // robotsFoo() {
+    //   return this.$store.state.robots.foo;
+    // },
+    // usersFoo() {
+    //   return this.$store.state.users.foo;
+    // },
     rootGetterFoo() {
       return this.$store.getters.foo;
     },
