@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 <template>
 
   <!-- Don't show until availableParts is populated (v-if) -->
@@ -32,8 +34,6 @@
       <button class="add-to-cart" @click="addToCart()">Add to Cart</button>
 
     </div>
-
-
 
     <div class="top-row">
         <div class="robot-name"></div>
@@ -102,68 +102,68 @@
 
 <script>
 
-  // import availableParts from '../data/parts';
-  import createdHookMixin from './created-hook-mixin';
-  import PartSelector from './PartSelector.vue';
-  import CollapsibleSection from '../shared/CollapsibleSection.vue';
+// import availableParts from '../data/parts';
+import createdHookMixin from './created-hook-mixin';
+import PartSelector from './PartSelector.vue';
+import CollapsibleSection from '../shared/CollapsibleSection.vue';
 
 
-  export default {
-    name: 'RobotBuilder',
-    created() {
-      this.$store.dispatch('getParts');
-    },
-    beforeRouteLeave(to, from, next) {
-      if(this.addedToCart){
-        next(true);
-      } else {
-        const response = confirm('You have not added the robot to your cart, are you sure you want to leave?');
-        next(response);
-      }
-    },
-    components: { PartSelector, CollapsibleSection },
-    data() {
-      return {
-        // availableParts, // old: fetched from data/parts.js
-        addedToCart: false,
-        cart: [],
-        selectedRobot: {
-          head: {},
-          leftArm: {},
-          torso: {},
-          rightArm: {},
-          base: {},
-        }
-      };
-    },
-    mixins: [createdHookMixin],
-    computed: {
-      // Will update whenever data returns from created() dispatched...
-      availableParts() {
-        return this.$store.state.robots.parts;
+export default {
+  name: 'RobotBuilder',
+  created() {
+    this.$store.dispatch('robots/getParts');
+  },
+  beforeRouteLeave(to, from, next) {
+    if (this.addedToCart) {
+      next(true);
+    } else {
+      const response = confirm('You have not added the robot to your cart, are you sure you want to leave?');
+      next(response);
+    }
+  },
+  components: { PartSelector, CollapsibleSection },
+  data() {
+    return {
+      // availableParts, // old: fetched from data/parts.js
+      addedToCart: false,
+      cart: [],
+      selectedRobot: {
+        head: {},
+        leftArm: {},
+        torso: {},
+        rightArm: {},
+        base: {},
       },
-      saleBorderClass() {
-        return this.selectedRobot.head.onSale ? 'sale-border' : '';
-      },
-
+    };
+  },
+  mixins: [createdHookMixin],
+  computed: {
+    // Will update whenever data returns from created() dispatched...
+    availableParts() {
+      return this.$store.state.robots.parts;
     },
-    methods: {
-      addToCart() {
-        const robot = this.selectedRobot;
-        const cost = robot.head.cost + robot.leftArm.cost + robot.torso.cost + robot.rightArm.cost + robot.base.cost;
-        // Add to cart locally in state:
-        // this.cart.push(Object.assign({}, robot, { cost }));
-        // Add robot to global store state! First param is the name of the mutation, followed by the state data:
-        // addRobotToCart returns a promise, if true then router redirects to cart:
-        this.$store.dispatch('addRobotToCart', Object.assign({}, robot, { cost }))
-          .then(() => this.$router.push('/cart'));
-        this.addedToCart = true;
-      },
-
-
-
+    saleBorderClass() {
+      return this.selectedRobot.head.onSale ? 'sale-border' : '';
     },
-  };
+
+  },
+  methods: {
+    addToCart() {
+      const robot = this.selectedRobot;
+      // eslint-disable-next-line
+      const cost = robot.head.cost + robot.leftArm.cost + robot.torso.cost + robot.rightArm.cost + robot.base.cost;
+      // Add to cart locally in state:
+      // this.cart.push(Object.assign({}, robot, { cost }));
+      // eslint-disable-next-line
+      // Add robot to global store state! First param is the name of the mutation, followed by the state data:
+      // addRobotToCart returns a promise, if true then router redirects to cart:
+      // When placed in a namspaced module, we need to add namespace (robots/)
+      this.$store.dispatch('robots/addRobotToCart', Object.assign({}, robot, { cost }))
+        .then(() => this.$router.push('/cart'));
+      this.addedToCart = true;
+    },
+  },
+};
 
 </script>
 
