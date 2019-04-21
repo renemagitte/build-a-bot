@@ -101,7 +101,7 @@
 </template>
 
 <script>
-
+import { mapActions } from 'vuex';
 // import availableParts from '../data/parts';
 import createdHookMixin from './created-hook-mixin';
 import PartSelector from './PartSelector.vue';
@@ -111,7 +111,9 @@ import CollapsibleSection from '../shared/CollapsibleSection.vue';
 export default {
   name: 'RobotBuilder',
   created() {
-    this.$store.dispatch('robots/getParts');
+    // this.$store.dispatch('robots/getParts');
+    // with mapActions the above can be shortened down to: (dispatch is taken care of..)
+    this.getParts();
   },
   beforeRouteLeave(to, from, next) {
     if (this.addedToCart) {
@@ -148,6 +150,8 @@ export default {
 
   },
   methods: {
+    // mapActions is called from within th METHODS section unlike the other map helpers
+    ...mapActions('robots', ['getParts', 'addRobotToCart']),
     addToCart() {
       const robot = this.selectedRobot;
       // eslint-disable-next-line
@@ -158,7 +162,9 @@ export default {
       // Add robot to global store state! First param is the name of the mutation, followed by the state data:
       // addRobotToCart returns a promise, if true then router redirects to cart:
       // When placed in a namspaced module, we need to add namespace (robots/)
-      this.$store.dispatch('robots/addRobotToCart', Object.assign({}, robot, { cost }))
+      // this.$store.dispatch('robots/addRobotToCart', Object.assign({}, robot, { cost }))
+      // With mapActions shortened to:
+      this.addRobotToCart(Object.assign({}, robot, { cost }))
         .then(() => this.$router.push('/cart'));
       this.addedToCart = true;
     },
