@@ -4,7 +4,9 @@
       <nav>
         <ul>
           <li class="nav-item">
+            <!-- eslint-disable-next-line -->
             <!-- Attrubute 'exact' makes so that special vue class 'router-link-active' only applies to the exact route! -->
+            <!-- eslint-disable-next-line -->
             <!-- This can also be done with adding attribute 'active-class="my-active-class-name"' -->
             <router-link class="nav-link" :to="{name: 'Home'}" exact>
               <img class="logo" src="./assets/build-a-bot-logo.png" />
@@ -16,6 +18,15 @@
             <router-link class="nav-link" :to="{name: 'Build'}" exact>
               Build
             </router-link>
+          </li>
+
+          <li class="nav-item cart">
+            <router-link class="nav-link" to="/cart" exact>
+              Cart
+            </router-link>
+            <div class="cart-items">
+              {{cart.length}}
+            </div>
           </li>
 
         </ul>
@@ -39,14 +50,18 @@
 </template>
 
 <script>
-// import HomePage from './home/HomePage.vue';
-//import RobotBuilder from './build/RobotBuilder.vue';
+// import RobotBuilder from './build/RobotBuilder.vue';
 
 export default {
   name: 'app',
   // components: {
   //   RobotBuilder,
   // },
+  computed: {
+    cart() {
+      return this.$store.state.cart;
+    },
+  },
 };
 </script>
 
@@ -94,6 +109,11 @@ ul {
   font-size: 22px;
   border-right: 1px solid #bbb;
 }
+.nav-item.cart {
+  position: relative;
+  margin-left: auto;
+  border-right: none;
+}
 .logo {
   vertical-align: middle;
   height: 30px;
@@ -122,6 +142,16 @@ ul {
   min-height: 300px;
 }
 
-
+.cart-items {
+  position: absolute;
+  top: -5px;
+  right: -9px;
+  font-size: 18px;
+  width: 20px;
+  text-align: center;
+  display: inline-block;
+  border-radius: 100px;
+  background-color: mediumseagreen;
+}
 
 </style>

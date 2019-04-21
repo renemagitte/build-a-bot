@@ -74,7 +74,8 @@
 
     </div>
 
-    <div>
+    <!-- <div>
+      // Old local cart section (before adding vuex)
       <h1>Cart</h1>
       <table>
         <thead>
@@ -85,7 +86,7 @@
         </thead>
         <tbody>
 
-          <!-- Needs unique key, eg index -->
+          // Needs unique key, eg index
           <tr v-for="(robot, index) in cart" :key="index">
             <td> {{ robot.head.title }} </td>
             <td class="cost"> {{ robot.cost }} </td>
@@ -93,7 +94,7 @@
 
         </tbody>
       </table>
-    </div>
+    </div> -->
   </div>
 
 </template>
@@ -142,7 +143,12 @@
       addToCart() {
         const robot = this.selectedRobot;
         const cost = robot.head.cost + robot.leftArm.cost + robot.torso.cost + robot.rightArm.cost + robot.base.cost;
-        this.cart.push(Object.assign({}, robot, { cost }));
+
+        // Add to cart locally in state:
+        // this.cart.push(Object.assign({}, robot, { cost }));
+        // Add robot to global store state! First param is the name of the mutation, followed by the state data;
+        this.$store.commit('addRobotToCart', Object.assign({}, robot, { cost }))
+
         this.addedToCart = true;
       },
 
@@ -268,15 +274,15 @@
   color: red;
 }
 
-td, th {
-  text-align: left;
-  padding: 5px;
-  padding-right: 20px;
-}
+// td, th {
+//   text-align: left;
+//   padding: 5px;
+//   padding-right: 20px;
+// }
 
-.cost {
-  text-align: right;
-}
+// .cost {
+//   text-align: right;
+// }
 
 .sale-border {
   border: 3px solid red;
