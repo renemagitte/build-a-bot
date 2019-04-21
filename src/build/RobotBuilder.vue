@@ -102,6 +102,7 @@
 
 <script>
 import { mapActions } from 'vuex';
+// import { mapMutations } from 'vuex';
 // import availableParts from '../data/parts';
 import createdHookMixin from './created-hook-mixin';
 import PartSelector from './PartSelector.vue';
@@ -152,6 +153,8 @@ export default {
   methods: {
     // mapActions is called from within th METHODS section unlike the other map helpers
     ...mapActions('robots', ['getParts', 'addRobotToCart']),
+    // ..and if we would have had any mapMutations:
+    // ...mapMutations('robots', ['someMutation']),
     addToCart() {
       const robot = this.selectedRobot;
       // eslint-disable-next-line
