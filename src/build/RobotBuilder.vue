@@ -143,12 +143,10 @@
       addToCart() {
         const robot = this.selectedRobot;
         const cost = robot.head.cost + robot.leftArm.cost + robot.torso.cost + robot.rightArm.cost + robot.base.cost;
-
         // Add to cart locally in state:
         // this.cart.push(Object.assign({}, robot, { cost }));
         // Add robot to global store state! First param is the name of the mutation, followed by the state data;
-        this.$store.commit('addRobotToCart', Object.assign({}, robot, { cost }))
-
+        this.$store.commit('addRobotToCart', Object.assign({}, robot, { cost }));
         this.addedToCart = true;
       },
 
