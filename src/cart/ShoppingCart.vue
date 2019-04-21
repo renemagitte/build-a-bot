@@ -59,7 +59,8 @@ export default {
       return this.$store.state.robots.cart;
     },
     cartSaleItems() {
-      return this.$store.getters.cartSaleItems;
+      // How to access getters within namespaced module:
+      return this.$store.getters['robots/cartSaleItems'];
     },
   },
 };
