@@ -1,5 +1,13 @@
 <template>
   <div id="app">
+    Root Foo: {{rootFoo}} <br />
+    Robots Foo: {{robotsFoo}} <br />
+    Users Foo: {{usersFoo}} <br />
+    <br />
+    Root Getter Foo: {{rootGetterFoo}} <br />
+    Robots Getter Foo: {{robotsGetterFoo}} <br />
+    Users Getter Foo: {{usersGetterFoo}} <br />
+
     <header>
       <nav>
         <ul>
@@ -57,7 +65,28 @@ export default {
   // components: {
   //   RobotBuilder,
   // },
+  // Examples on how to reach states and getters in root vs namespaced module stores vs NON-namespaced modules:
+  // root and NON-namespaced modules shares namespace (and so getters within it), but not state!!!
+  // Also users getter will apply to root in this scenario..........
   computed: {
+    rootFoo() {
+      return this.$store.state.foo;
+    },
+    robotsFoo() {
+      return this.$store.state.robots.foo;
+    },
+    usersFoo() {
+      return this.$store.state.users.foo;
+    },
+    rootGetterFoo() {
+      return this.$store.getters.foo;
+    },
+    robotsGetterFoo() {
+      return this.$store.getters['robots/foo'];
+    },
+    usersGetterFoo() {
+      return this.$store.getters['users/foo'];
+    },
     cart() {
       // When returned from store/index
       // return this.$store.state.cart;
