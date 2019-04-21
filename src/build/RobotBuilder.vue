@@ -1,6 +1,7 @@
 <template>
 
-  <div class="content">
+  <!-- Don't show until availableParts is populated (v-if) -->
+  <div v-if="availableParts" class="content">
 
     <div class="preview">
 
@@ -101,7 +102,7 @@
 
 <script>
 
-  import availableParts from '../data/parts';
+  // import availableParts from '../data/parts';
   import createdHookMixin from './created-hook-mixin';
   import PartSelector from './PartSelector.vue';
   import CollapsibleSection from '../shared/CollapsibleSection.vue';
@@ -109,6 +110,9 @@
 
   export default {
     name: 'RobotBuilder',
+    created() {
+      this.$store.dispatch('getParts');
+    },
     beforeRouteLeave(to, from, next) {
       if(this.addedToCart){
         next(true);
@@ -120,7 +124,7 @@
     components: { PartSelector, CollapsibleSection },
     data() {
       return {
-        availableParts,
+        // availableParts, // old: fetched from data/parts.js
         addedToCart: false,
         cart: [],
         selectedRobot: {
@@ -134,6 +138,10 @@
     },
     mixins: [createdHookMixin],
     computed: {
+      // Will update whenever data returns from created() dispatched...
+      availableParts() {
+        return this.$store.state.parts;
+      },
       saleBorderClass() {
         return this.selectedRobot.head.onSale ? 'sale-border' : '';
       },
