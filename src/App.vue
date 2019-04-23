@@ -176,6 +176,7 @@ ul {
   display: flex;
   margin: 10px auto 0 auto;
   justify-content: center;
+  width: 1084px;
 }
 
 .aside {
