@@ -22,7 +22,7 @@
     <!-- <span v-pin:position.top.right class="sale" v-show="selectedPart.onSale">Sale!</span> -->
     <!-- ...as object (more flexible): -->
     <!-- <span v-pin="{ bottom: '10px', right: '5px'}" class="sale" v-show="selectedPart.onSale">Sale!</span> -->
-    <!-- ..with directive lifecycle hooks? -->
+    <!-- ..with directive lifecycle hooks? And globally import in main.js -->
     <span @click="pinPadding='30px'" v-pin="{ bottom: pinPadding, right: pinPadding}" class="sale" v-show="selectedPart.onSale">Sale!</span>
   </div>
 </template>
