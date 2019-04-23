@@ -18,7 +18,10 @@
     <button @click="selectNextPart()" class="next-selector"></button>
 
     <!-- v-pin passes the element to the pin-directive.js (it's imported and declared in within script tag) -->
-    <span v-pin class="sale" v-show="selectedPart.onSale">Sale!</span>
+    <!-- with args/modifiers: -->
+    <!-- <span v-pin:position.top.right class="sale" v-show="selectedPart.onSale">Sale!</span> -->
+    <!-- ...as object (more flexible): -->
+    <span v-pin="{ bottom: '10px', right: '5px'}" class="sale" v-show="selectedPart.onSale">Sale!</span>
   </div>
 </template>
 
